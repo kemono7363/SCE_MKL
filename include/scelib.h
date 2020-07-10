@@ -10,6 +10,7 @@
 #include <assert.h> //for assert
 #include <time.h> //for clock and time related
 #include<float.h>
+#include "sceenum.h"
 #define PI acos(-1)
 
 //define of cache structure
@@ -31,12 +32,6 @@ pthread_t clientThread;
 pthread_attr_t serverThreadAttr[NUM_SERVERS];
 pthread_t serverThread[NUM_SERVERS];
 int serverIndex[NUM_SERVERS]; //serverIndex-th server runs on core (serverIndex+1).
-
-enum CBLAS_ORDER {CblasRowMajor=101, CblasColMajor=102};
-enum CBLAS_TRANSPOSE {CblasNoTrans=111, CblasTrans=112, CblasConjTrans=113};
-enum CBLAS_UPLO {CblasUpper=121, CblasLower=122};
-enum CBLAS_DIAG {CblasNonUnit=131, CblasUnit=132};
-enum CBLAS_SIDE {CblasLeft=141, CblasRight=142};
 
 typedef enum{
 	MATRIX_PRODUCT,
@@ -145,3 +140,163 @@ void sce_axpy(
 	const int                  INCX,
 	double                     * Y,
 	const int                  INCY);
+
+//level 2
+
+void sce_dgemv(
+	const enum CBLAS_TRANSPOSE TRANS,
+	const int                  M,
+	const int                  N,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+void sce_dgemvN(
+	const int                  M,
+	const int                  N,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+void sce_dgemvT(
+	const int                  M,
+	const int                  N,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+void sce_dgbmv
+(
+	const enum CBLAS_TRANSPOSE TRANS,
+	const int                  M,
+	const int                  N,
+	const int                  KL,
+	const int                  KU,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+void sce_dgbmvN
+(
+	const int                  M,
+	const int                  N,
+	const int                  KL,
+	const int                  KU,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+void sce_dgbmvT
+(
+	const int                  M,
+	const int                  N,
+	const int                  KL,
+	const int                  KU,
+	const double               ALPHA,
+	const double               * A,
+	const int                  LDA,
+	const double               * X,
+	const int                  INCX,
+	const double               BETA,
+	double                     * Y,
+	const int                  INCY
+);
+
+//level 3
+
+void sce_gemm(
+	const enum CBLAS_TRANSPOSE TRANSA,
+   	const enum CBLAS_TRANSPOSE TRANSB,
+   	const int                  M,
+   	const int                  N,
+   	const int                  K,
+   	const double               ALPHA,
+   	const double               * A,
+   	const int                  LDA,
+   	const double               * B,
+   	const int                  LDB,
+   	const double               BETA,
+   	double                     * C,
+   	const int                  LDC
+);
+void sce_gemmNN
+(
+   	const int                  M,
+   	const int                  N,
+   	const int                  K,
+   	const double               ALPHA,
+   	const double               * A,
+   	const int                  LDA,
+   	const double               * B,
+   	const int                  LDB,
+   	const double               BETA,
+   	double                     * C,
+   	const int                  LDC
+);
+void sce_gemmNT
+(
+   	const int                  M,
+   	const int                  N,
+   	const int                  K,
+   	const double               ALPHA,
+   	const double               * A,
+   	const int                  LDA,
+   	const double               * B,
+   	const int                  LDB,
+   	const double               BETA,
+   	double                     * C,
+   	const int                  LDC
+);
+void sce_gemmTN
+(
+   	const int                  M,
+   	const int                  N,
+   	const int                  K,
+   	const double               ALPHA,
+   	const double               * A,
+   	const int                  LDA,
+   	const double               * B,
+   	const int                  LDB,
+   	const double               BETA,
+   	double                     * C,
+   	const int                  LDC
+);
+void sce_gemmTT
+(
+   	const int                  M,
+   	const int                  N,
+   	const int                  K,
+   	const double               ALPHA,
+   	const double               * A,
+   	const int                  LDA,
+   	const double               * B,
+   	const int                  LDB,
+   	const double               BETA,
+   	double                     * C,
+   	const int                  LDC
+);
