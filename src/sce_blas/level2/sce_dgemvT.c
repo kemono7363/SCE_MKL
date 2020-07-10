@@ -77,7 +77,7 @@ void sce_dgemvT
       t0 = 0.0;
       for( i = 0, iaij = jaj, ix = 0; i < N; i++, iaij += 1, ix += INCX )
       { t0 += A[iaij] * X[ix]; }
-      SCEdelscal( BETA, Y[jy] ); Y[jy] += ALPHA * t0;
+      Mdelscal( BETA, Y[jy] ); Y[jy] += ALPHA * t0;
    }
 /*
  * End of sce_dgemvT

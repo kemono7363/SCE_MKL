@@ -72,7 +72,7 @@ void sce_dgemvN
  * .. Executable Statements ..
  *
  */
-   SCEdvscal( M, BETA, Y, INCY );
+   Mdvscal( M, BETA, Y, INCY );
    for( j = 0, jaj  = 0, jx = 0; j < N; j++, jaj += LDA, jx += INCX )
    {
       t0 = ALPHA * X[jx];

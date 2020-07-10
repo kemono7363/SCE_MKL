@@ -47,7 +47,7 @@
  * Include files
  */
 #include "scelib.h"
-#include "sce_misc.h"
+#include "scemisc.h"
 
 void sce_dgbmvN
 (
@@ -65,13 +65,16 @@ void sce_dgbmvN
    const int                  INCY
 )
 {
+/*
+ * .. Local Variables ..
+ */
    double                     t0;
    int                        i, i0, i1, iaij, iy, j, jaj, jx, k, kx=0, ky=0;
 /* ..
  * .. Executable Statements ..
  *
  */
-   SCEdvscal( M, BETA, Y, INCY );
+   Mdvscal( M, BETA, Y, INCY );
 
    for( j = 0, jaj = 0, jx = kx; j < N; j++, jaj += LDA, jx += INCX )
    {

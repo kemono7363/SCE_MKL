@@ -65,7 +65,6 @@ void sce_dgbmvT
    const int                  INCY
 )
 {
-
 /*
  * .. Local Variables ..
  */
@@ -82,7 +81,7 @@ void sce_dgbmvT
 
       for( i = i0, iaij = k+i0+jaj, ix = kx; i <= i1;
            i++, iaij += 1, ix += INCX ) { t0 += A[iaij] * X[ix]; }
-      SCEdelscal( BETA, Y[jy] ); Y[jy] += ALPHA * t0;
+      Mdelscal( BETA, Y[jy] ); Y[jy] += ALPHA * t0;
       if( j >= KU ) kx += INCX;
    }
 /*
