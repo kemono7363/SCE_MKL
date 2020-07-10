@@ -1,0 +1,48 @@
+
+variable explanation: assume that 3 server threads(4 in total threads) are used in one dispatch iteration
+xxx-> replaced by name of function
+iteration -> outer loop of client dispatch
+dispatch -> inner loop of client dispatch
+outer iteration loop:
+	numOfIteration_xxx: total times needed to dsipatch subtask according to the need of the task
+		dispatchTimes(inner loop defined variable): current times defined by times that needed to dispatch subtask according to the need of the task. 
+				eg. dot_product of two vector, each of which has 8100 numbers, 
+				for each server loop, dot product of 2 product (300 numbers included) 
+				2 vectors containing 900 numbers of each will be processed
+				dispatch_times = 8100 / 900 = 9	
+
+inner dispatch loop:
+	NUM_SERVERS predefined in .h file, the number of server thread
+	numOfdispatch : times needed for dispatch under the environment of the task
+		serverIndex(inner loop defined variable): in the current dispatch process, order of server thread that accepts data
+				eg. two vectors, each has 900 numbers dispatched in one iteration
+				serverIndex =0 accept data[0:299]
+				serverIndex =1 accept data[300:599]
+				serverIndex =2 accept data[600:899]
+parameter to transfer:
+	function:	
+		variable defined in order to simplify parameters transfer.
+	list:	
+		numOfPara_xxx	the total number of parameters needed to pass from client to server 
+				eg. sce_sin(x) only 1 variable needed to pass
+		numOfParaI_xxx	the total number of parameters needed to pass per iteration
+		numOfparaD_xxx	the total number of parameters needed to pass per dispatch 
+		input_xxx[]		local global input of parameter 
+ 		output_xxx[]		local global output of the result
+		numOfIntPerOperand 300
+		numOfFloatPerOperand 300
+		numOfFloatPerOperand 150
+
+/*procedure to revise 
+1.parameter datatypes, mostly double 1200/8=150 for each block
+2.input parameters initialization
+3._xxx function name
+4.numOf___ 5 parameters
+5.name of thread function including pthread_create eg. clientMain_xxx 
+
+*/
+
+math replacement:
+replace _xxx with _xxx ?? with ctrl+G
+math.xxx -> math.xxx
+TODO:replace functiontype in SharedMemory struct in every file
